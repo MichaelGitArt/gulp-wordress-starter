@@ -1,0 +1,22 @@
+/*#wpadminbar{
+ display: none !important;
+}
+html[lang="ru-RU"]{
+ margin-top: 0 !important;
+} */
+
+body{
+  font-size: 14px;
+  min-width: 320px;
+  position: relative;
+  line-height: 1.45;
+  font-family: 'Open Sans', sans-serif;
+  overflow-x: hidden;
+  color: #333;
+}
+a, button, input[type="submit"]{
+  outline: none !important;
+}
+.w-100 {
+  width: 100%!important;
+}
