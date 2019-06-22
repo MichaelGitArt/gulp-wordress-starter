@@ -1,37 +1,65 @@
-## Test updates
+# Gulp Wordpress Starter
 
-You can use the [editor on GitHub](https://github.com/michaelgitart/gulp-wordress-start/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Gulp сборка разработанная для разработки wordpress тем локально.
+Основная функция сборки это автоматичское обновление css на сайте
+при сохранении css файлов. При этом страница не перегружается 
+и результат видно сразу.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+При изменении .php файлов страница перегружается полностью.
 
-### Markdown
+## Использование
+### Добавьте файлы к теме
+Поместите содержимое репозитория в папку с темой wordpress.
+Убедитесь что не будет конфликтов имен и директорий.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+### Отключите кеширование
+Для отключение кеширования при разработке подключите стили и скрипты даным способом:
+```php
+// Css Styles
+if (!is_admin()) {
+	$theme = wp_get_theme(); // Used for cache busting
+	wp_enqueue_style('Style', get_template_directory_uri() . '/dist/styles.css', array(), $theme->get('Version'), 'all');
+} else {
+	wp_enqueue_style('Style', get_template_directory_uri() . '/dist/styles.css');
+}
+// JS Scripts
+if (!is_admin()) {
+	$theme = wp_get_theme(); // Used for cache busting
+	wp_enqueue_script('m1_template-scripts', get_template_directory_uri() . '/dist/scripts.js', array(), $theme->get('Version'), 'all');
+} else {
+	wp_enqueue_script( 'm1_template-scripts', get_template_directory_uri() . '/dist/scripts.js');
+}
+```
+### Найстройте gulpfile.js
+Обезательно замените localhost.wp в вашем `gulpfile.js` на ваш локальный домен
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+### Запуск сборки
+Дальше установите все пакеты npm и запускайте зборку
+```
+npm install
+npm gulp
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+## Файловая структура
+```
+theme_folder
+-css
+--libs-css.css
+--main.css
+--_media.css
+-js
+--libs-js.js
+--common.js
+-dist - тут будут содержатся файлы после запуска сборки
+--style.css
+--scripts.js
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/michaelgitart/gulp-wordress-start/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+// Также файлы сборки для gulp:
+package.js
+package-lock.js
+gulpfile.js
+```
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.

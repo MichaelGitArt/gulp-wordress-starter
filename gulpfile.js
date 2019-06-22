@@ -8,29 +8,9 @@ const concat = require('gulp-concat'),
 	autoprefixer = require('gulp-autoprefixer');
 
 
-// Turn of catching for developing. Place in functions.php
-
-// Css Styles
-// 	if (!is_admin()) {
-// 	$theme = wp_get_theme(); // Used for cache busting
-// 	wp_enqueue_style('Style', get_template_directory_uri() . '/dist/styles.css', array(), $theme->get('Version'), 'all');
-// } else {
-// 	wp_enqueue_style('Style', get_template_directory_uri() . '/dist/styles.css');
-// }
-
-// JS Scripts
-// if (!is_admin()) {
-// 	$theme = wp_get_theme(); // Used for cache busting
-// 	wp_enqueue_script('m1_template-scripts', get_template_directory_uri() . '/dist/scripts.js', array(), $theme->get('Version'), 'all');
-// } else {
-// 	wp_enqueue_script( 'm1_template-scripts', get_template_directory_uri() . '/dist/scripts.js');
-// }
-
-
-
 function browserServer() {
 	browserSync.init({
-		proxy: 'lider.wp' // Put your local domain
+		proxy: 'localhost.wp' // Put your local domain
 	});
 }
 
