@@ -2,10 +2,12 @@ const { src, watch, parallel, dest } = require('gulp');
 
 const concat = require('gulp-concat'),
 	browserSync = require('browser-sync').create(),
-	// sass = require('gulp-sass'), // For sass/scss files
+	sass = require('gulp-sass'), // For sass/scss files
 	uglify = require('gulp-uglify'),
 	cleancss = require('gulp-clean-css'),
+	notify = require('gulp-notify'),
 	autoprefixer = require('gulp-autoprefixer');
+
 
 
 function browserServer() {
@@ -22,10 +24,11 @@ function code() {
 
 function styles() {
 	return src([
-		'./css/libs-css.css',
-		'./css/main.css',
-		'./css/_media.css'
+		'./scss/libs-css.scss',
+		'./scss/main.scss',
+		'./scss/media.scss'
 	])
+		.pipe(sass({ outputStyle: 'expanded' }).on("error", notify.onError()))
 		.pipe(concat('styles.css'))
 		.pipe(autoprefixer(['last 15 versions']))
 		.pipe(cleancss({ level: { 1: { specialComments: 0 } } }))
@@ -47,7 +50,7 @@ function scripts() {
 
 function watchChange() {
 	watch('./**/*.php', parallel(code))
-	watch('./css/*.css', parallel(styles))
+	watch('./scss/*.scss', parallel(styles))
 	watch('./js/*.js', parallel(scripts))
 }
 

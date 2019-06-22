@@ -1,4 +1,4 @@
-# Gulp Wordpress Starter
+# Gulp Wordpress Starter ( SCSS Ветка )
 
 Gulp сборка разработанная для разработки wordpress тем локально.
 Основная функция сборки это автоматичское обновление css на сайте
@@ -45,10 +45,10 @@ npm gulp
 ## Файловая структура
 ```
 theme_folder
--css
---libs-css.css
---main.css
---_media.css
+-scss
+--libs-css.scss
+--main.scss
+--media.scss
 -js
 --libs-js.js
 --common.js
